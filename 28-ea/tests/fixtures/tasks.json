@@ -1,0 +1,12 @@
+{
+  "suryodaya": [
+    {"id": "t-s1", "title": "Write seat report", "status": "open", "due_date": "2026-11-05",
+     "created_by": "u-100", "assignee_id": "u-100"},
+    {"id": "t-s2", "title": "Someone else's chore", "status": "open", "due_date": "2026-11-01",
+     "created_by": "u-900", "assignee_id": "u-901"}
+  ],
+  "keystone": [
+    {"id": "t-k1", "title": "Prepare demo", "status": "open", "due_date": "2026-11-01",
+     "created_by": "u-100", "assignee_id": null}
+  ]
+}

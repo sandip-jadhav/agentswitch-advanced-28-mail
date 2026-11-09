@@ -1,0 +1,15 @@
+{
+  "suryodaya": [
+    {"id": "ev-s1", "title": "Daily standup", "start_at": "2026-11-06T03:30:00Z", "end_at": "2026-11-06T04:00:00Z",
+     "all_day": false, "status": "confirmed", "organizer_email": "lead@example.test",
+     "attendees": [{"email": "team28c@example.test", "status": "accepted"}]},
+    {"id": "ev-s2", "title": "Design review", "start_at": "2026-11-06T09:00:00Z", "end_at": "2026-11-06T10:00:00Z",
+     "all_day": false, "status": "confirmed", "organizer_email": "",
+     "attendees": []}
+  ],
+  "keystone": [
+    {"id": "ev-k1", "title": "Class sync", "start_at": "2026-11-06T15:00:00Z", "end_at": "2026-11-06T15:30:00Z",
+     "all_day": false, "status": "confirmed", "organizer_email": "ta@example.test",
+     "attendees": [{"email": "team28c@example.test", "status": "accepted"}]}
+  ]
+}
