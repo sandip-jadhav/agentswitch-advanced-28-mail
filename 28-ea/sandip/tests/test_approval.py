@@ -714,5 +714,24 @@ class ExternalEditor(unittest.TestCase):
         self.assertFalse(os.path.exists(paths[0]))
 
 
+class OnlyTheApprovalStepStartsAProcess(unittest.TestCase):
+    """The editor is the one subprocess, and it serves only the human approval step (`e` at a terminal)."""
+
+    def test_no_module_but_approval_can_start_a_process(self):
+        import pathlib
+        root = pathlib.Path(__file__).resolve().parent.parent
+        sources = sorted(root.joinpath("ea_briefing").glob("*.py")) + [root / "briefing.py"] + \
+            sorted(root.joinpath("tools").glob("*.py"))
+        markers = ("subprocess", "os.system", "os.popen", "os.exec", "os.spawn", "pty.")
+        starters = sorted(p.name for p in sources if any(m in p.read_text(encoding="utf-8") for m in markers))
+        self.assertEqual(starters, ["approval.py"])
+
+    def test_in_approval_only_the_editor_uses_subprocess(self):
+        import inspect
+        uses = [name for name, fn in inspect.getmembers(approval, inspect.isfunction)
+                if fn.__module__ == approval.__name__ and "subprocess" in inspect.getsource(fn)]
+        self.assertEqual(uses, ["external_editor"])
+
+
 if __name__ == "__main__":
     unittest.main()

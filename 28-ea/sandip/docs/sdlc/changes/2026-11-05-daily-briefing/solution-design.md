@@ -170,7 +170,7 @@ All paths are under `28-ea/sandip/`.
 - **`tools/snapshot.py`** — Guardrail helper: writes a JSON list of ids and `updated_at` for mail, events and tasks per system to a git-ignored folder, and diffs two snapshots.
 - **`tests/`** — `unittest` suites per module, a `FakeTransport` that records every call, and fixtures. No network.
 - **`.gitignore`** — `briefings/`, `snapshots/`, `__pycache__/`.
-- **`DAILY_BRIEFING.md`** — Setup (`login`), running, settings, harness mode (variables, `--json`, exit codes), tests, and the safety rules in one paragraph.
+- **`README.md`** — Setup (`login`), running, settings, harness mode (variables, `--json`, exit codes), tests, and the safety rules in one paragraph.
 
 ## Data flow
 

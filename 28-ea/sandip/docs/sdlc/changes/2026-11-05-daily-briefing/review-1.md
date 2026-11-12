@@ -303,7 +303,7 @@ Diff: `origin/main...HEAD` (aa14bc59..526cafd0).
 
 **conventions**:
 - `/private/tmp/claude-502/-Users-jadhavsa-ai-personal-schoolOfAI-agentSwtichAdv/a32408f5-6f38-4838-b910-c1af0931f2f1/scratchpad/repo/28-ea/sandip/.gitignore`
-- `/private/tmp/claude-502/-Users-jadhavsa-ai-personal-schoolOfAI-agentSwtichAdv/a32408f5-6f38-4838-b910-c1af0931f2f1/scratchpad/repo/28-ea/sandip/DAILY_BRIEFING.md`
+- `/private/tmp/claude-502/-Users-jadhavsa-ai-personal-schoolOfAI-agentSwtichAdv/a32408f5-6f38-4838-b910-c1af0931f2f1/scratchpad/repo/28-ea/sandip/README.md`
 - `/private/tmp/claude-502/-Users-jadhavsa-ai-personal-schoolOfAI-agentSwtichAdv/a32408f5-6f38-4838-b910-c1af0931f2f1/scratchpad/repo/28-ea/sandip/briefing.py`
 - `/private/tmp/claude-502/-Users-jadhavsa-ai-personal-schoolOfAI-agentSwtichAdv/a32408f5-6f38-4838-b910-c1af0931f2f1/scratchpad/repo/28-ea/sandip/ea_briefing/__init__.py`
 - `/private/tmp/claude-502/-Users-jadhavsa-ai-personal-schoolOfAI-agentSwtichAdv/a32408f5-6f38-4838-b910-c1af0931f2f1/scratchpad/repo/28-ea/sandip/ea_briefing/approval.py`
@@ -343,7 +343,7 @@ Diff: `origin/main...HEAD` (aa14bc59..526cafd0).
 
 **docs-coherence**:
 - `/private/tmp/claude-502/-Users-jadhavsa-ai-personal-schoolOfAI-agentSwtichAdv/a32408f5-6f38-4838-b910-c1af0931f2f1/scratchpad/repo/28-ea/sandip/.gitignore`
-- `/private/tmp/claude-502/-Users-jadhavsa-ai-personal-schoolOfAI-agentSwtichAdv/a32408f5-6f38-4838-b910-c1af0931f2f1/scratchpad/repo/28-ea/sandip/DAILY_BRIEFING.md`
+- `/private/tmp/claude-502/-Users-jadhavsa-ai-personal-schoolOfAI-agentSwtichAdv/a32408f5-6f38-4838-b910-c1af0931f2f1/scratchpad/repo/28-ea/sandip/README.md`
 
 Withheld (under `28-ea/sandip/docs/sdlc/changes/2026-11-05-daily-briefing/`):
 - `28-ea/sandip/docs/sdlc/changes/2026-11-05-daily-briefing/implement-retro.md`

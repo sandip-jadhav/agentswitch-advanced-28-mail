@@ -86,7 +86,7 @@ flowchart TD
 ├── tools/snapshot.py      # guardrail: before/after snapshot of record ids, then a diff
 ├── tests/                 # 14 test files, fake transport, fake clock, fake model, fixtures
 ├── docs/sdlc/changes/2026-11-05-daily-briefing/   # PRD, design, plan, review, retro
-├── DAILY_BRIEFING.md      # setup, run, settings, harness mode, safety rules, live findings
+├── README.md              # setup, run, settings, harness mode, safety rules, live findings
 └── SUMMARY.md             # this summary
 ```
 
@@ -209,7 +209,7 @@ flowchart LR
 
 | Document | Contents |
 |---|---|
-| [`DAILY_BRIEFING.md`](DAILY_BRIEFING.md) | Login, run, settings, approval keys, harness mode, tests, safety rules, live-probe findings, timing record |
+| [`README.md`](README.md) | Login, run, settings, approval keys, harness mode, tests, safety rules, live-probe findings, timing record |
 | [`prd.md`](docs/sdlc/changes/2026-11-05-daily-briefing/prd.md) | Requirements: 5 user stories with scenarios, FR/NFR, success metrics, out of scope, decisions |
 | [`solution-design.md`](docs/sdlc/changes/2026-11-05-daily-briefing/solution-design.md) | Architecture, components, data flow, error handling, testing, decisions SD-D-1…19, deviations |
 | [`plan.md`](docs/sdlc/changes/2026-11-05-daily-briefing/plan.md) | Program design, 48 behaviours, 3 slices with tasks, probe and live evidence, replan log |
@@ -227,7 +227,7 @@ flowchart LR
   ```
 
   They use a fake transport that records every call, a fake clock, a fake model server and fixtures. `test_scenarios.py` runs the whole command once for each PRD scenario.
-- **Live runs** on both systems for every slice, with timings in `DAILY_BRIEFING.md`.
+- **Live runs** on both systems for every slice, with timings in `README.md`.
 - **Blind review result:** 0 critical, 0 major, 20 minor findings. Examples:
   - flaky-timing risks in a few tests;
   - small duplicated helpers;

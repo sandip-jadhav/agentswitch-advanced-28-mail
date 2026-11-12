@@ -100,7 +100,7 @@ No existing code changes. The package copies the request shape of `33-red-team/r
 +     test_<module>.py        # one unittest suite per module
 +     test_scenarios.py       # test_story<N>_scenario<M>_* end to end through cli.main with fakes
 +   .gitignore                # briefings/, snapshots/, __pycache__/ (slice 1)
-+   DAILY_BRIEFING.md         # login, run, settings, harness mode, tests, safety rules, timing record (slice 1; each later slice adds its part)
++   README.md                 # login, run, settings, harness mode, tests, safety rules, timing record (slice 1; each later slice adds its part)
     docs/sdlc/changes/2026-11-05-daily-briefing/   # this plan and its design
 ```
 
@@ -252,9 +252,9 @@ Checked by hand, not by unit tests:
 
 | Slice | Name | Delivers | Seams | Behaviours | Status |
 |-------|------|----------|-------|------------|--------|
-| 1 | Meetings and tasks briefing | One command, after `login`, prints and saves a dated two-system briefing: meetings in each system's zone with clash and declined marks, the user's own overdue tasks plus the others count, the "no mailbox" Mail line, partial-failure reasons, exit codes, harness mode and `--json` for these parts (Story 1, Story 3, Story 4, Story 2 Scenario 2) | `briefing.py`, `cli`, `config`, `auth`, `mcp` (reads), `runner` (part threads), `mail` (mailbox check), `meetings`, `tasks`, `render`, `store`, `tools/snapshot.py`, `tests/`, `.gitignore`, `DAILY_BRIEFING.md` | [P-B-1](#p-b-1)–[P-B-23](#p-b-23) | done |
-| 2 | Mail needing an answer, with proposed replies | Unread mail needing an answer is listed oldest first with a summary and a checked, signed proposed reply, with the skipped, couldn't-be-opened and draft-already-saved lists, the 45 s drafting limit, the `OPENAI_*` endpoint and the mail fields in `--json` (Story 2) | `mail` (complete), `draft_writer`, `runner` (draft queue), `config` (model settings), `auth` (`load_signature`), `cli` (draft writer wiring, API key in secrets), `render` (mail entries), `tests/fakes.py` (`FakeDraftWriter`, `message_row`, fake model server), `DAILY_BRIEFING.md` | [P-B-24](#p-b-24)–[P-B-37](#p-b-37), [P-B-46](#p-b-46)–[P-B-48](#p-b-48) | done |
-| 3 | Approve drafts into the mailbox | Per proposed reply, save, edit then save, skip or stop. Approved replies become unsent drafts after a re-check and a read-back, with the summary counts and an Approval section in the file. Stdin at EOF skips everything (Story 5) | `approval`, `mcp` (`create_draft`, `ApprovalToken`), `mail` (keeps the mailbox), `render` (Approval section, `approval` in `--json`), `cli` (clients, approval wiring, `--json` written after approval), `tests/fakes.py` (`FakeEditor`, threading fields, create handler), `DAILY_BRIEFING.md` | [P-B-38](#p-b-38)–[P-B-45](#p-b-45) | done |
+| 1 | Meetings and tasks briefing | One command, after `login`, prints and saves a dated two-system briefing: meetings in each system's zone with clash and declined marks, the user's own overdue tasks plus the others count, the "no mailbox" Mail line, partial-failure reasons, exit codes, harness mode and `--json` for these parts (Story 1, Story 3, Story 4, Story 2 Scenario 2) | `briefing.py`, `cli`, `config`, `auth`, `mcp` (reads), `runner` (part threads), `mail` (mailbox check), `meetings`, `tasks`, `render`, `store`, `tools/snapshot.py`, `tests/`, `.gitignore`, `README.md` | [P-B-1](#p-b-1)–[P-B-23](#p-b-23) | done |
+| 2 | Mail needing an answer, with proposed replies | Unread mail needing an answer is listed oldest first with a summary and a checked, signed proposed reply, with the skipped, couldn't-be-opened and draft-already-saved lists, the 45 s drafting limit, the `OPENAI_*` endpoint and the mail fields in `--json` (Story 2) | `mail` (complete), `draft_writer`, `runner` (draft queue), `config` (model settings), `auth` (`load_signature`), `cli` (draft writer wiring, API key in secrets), `render` (mail entries), `tests/fakes.py` (`FakeDraftWriter`, `message_row`, fake model server), `README.md` | [P-B-24](#p-b-24)–[P-B-37](#p-b-37), [P-B-46](#p-b-46)–[P-B-48](#p-b-48) | done |
+| 3 | Approve drafts into the mailbox | Per proposed reply, save, edit then save, skip or stop. Approved replies become unsent drafts after a re-check and a read-back, with the summary counts and an Approval section in the file. Stdin at EOF skips everything (Story 5) | `approval`, `mcp` (`create_draft`, `ApprovalToken`), `mail` (keeps the mailbox), `render` (Approval section, `approval` in `--json`), `cli` (clients, approval wiring, `--json` written after approval), `tests/fakes.py` (`FakeEditor`, threading fields, create handler), `README.md` | [P-B-38](#p-b-38)–[P-B-45](#p-b-45) | done |
 
 Slice 1 is worth merging alone: it is the PRD's v1 briefing for meetings and tasks, it works on live data today because neither system has a mailbox for `team28c`, and it already holds the read-only guard and the harness seam. Until slice 2 lands, Mail is never complete: it is "no mailbox" or "mail listing not built yet", so Story 1 Scenario 1 (every part complete) is tested in slice 2 ([P-B-46](#p-b-46)). Slice 2 completes the v1 release (Story 1–4). It proposes replies but can save nothing until slice 3. Slice 3 is the PRD's fast-follow and needs the Keystone sample mailbox for its live check ([PRD-D-12](prd.md#prd-d-12)).
 
@@ -335,10 +335,10 @@ Slice 1 is worth merging alone: it is the PRD's v1 briefing for meetings and tas
     $ python3 -m unittest discover -s 28-ea/sandip/tests -t 28-ea/sandip -p test_scenarios.py
     Ran 31 tests ... OK
     ```
-13. Add `tools/snapshot.py` (before, after, diff), `.gitignore` and `DAILY_BRIEFING.md` (login, run, settings, harness mode, tests, safety rules) · verify: `python3 28-ea/sandip/tools/snapshot.py --help && git check-ignore -q 28-ea/sandip/briefings/x.md && test -f 28-ea/sandip/DAILY_BRIEFING.md`
+13. Add `tools/snapshot.py` (before, after, diff), `.gitignore` and `README.md` (login, run, settings, harness mode, tests, safety rules) · verify: `python3 28-ea/sandip/tools/snapshot.py --help && git check-ignore -q 28-ea/sandip/briefings/x.md && test -f 28-ea/sandip/README.md`
 
     ```text
-    $ python3 28-ea/sandip/tools/snapshot.py --help && git check-ignore -q 28-ea/sandip/briefings/x.md && test -f 28-ea/sandip/DAILY_BRIEFING.md
+    $ python3 28-ea/sandip/tools/snapshot.py --help && git check-ignore -q 28-ea/sandip/briefings/x.md && test -f 28-ea/sandip/README.md
     usage: snapshot.py [-h] [--system SYSTEM] [--dir DIR] {before,after,diff}
     exit 0
     ```
@@ -438,13 +438,13 @@ Run live 2026-11-06 on both systems at fd68fec (before the review fix 9dcd70f, w
     $ python3 -m unittest discover -s 28-ea/sandip/tests -t 28-ea/sandip -p test_scenarios.py
     Ran 50 tests ... OK
     ```
-23. Add the model settings and drafting limit to `DAILY_BRIEFING.md`, run the full suite and then, with the user's token and glc (needs a human, outside the Bash sandbox), a live run on both systems inside the snapshot guardrail (empty diff, which also shows `EmailMessage.get` marks nothing read where a mailbox exists), three timing runs and one harness-style run per system with `OPENAI_*` pointing at glc and stdin from `/dev/null`, recording the results under a `### Slice 2 live evidence` heading at the end of this section, and stating there whether Story 2's live mail checks still wait for a mailbox ([PRD-D-12](prd.md#prd-d-12)) · verify: `python3 -m unittest discover -s 28-ea/sandip/tests -t 28-ea/sandip && grep -q 'OPENAI_BASE_URL' 28-ea/sandip/DAILY_BRIEFING.md && grep -A12 '^### Slice 2 live evidence' 28-ea/sandip/docs/sdlc/changes/2026-11-05-daily-briefing/plan.md | grep -q 'snapshot'`
+23. Add the model settings and drafting limit to `README.md`, run the full suite and then, with the user's token and glc (needs a human, outside the Bash sandbox), a live run on both systems inside the snapshot guardrail (empty diff, which also shows `EmailMessage.get` marks nothing read where a mailbox exists), three timing runs and one harness-style run per system with `OPENAI_*` pointing at glc and stdin from `/dev/null`, recording the results under a `### Slice 2 live evidence` heading at the end of this section, and stating there whether Story 2's live mail checks still wait for a mailbox ([PRD-D-12](prd.md#prd-d-12)) · verify: `python3 -m unittest discover -s 28-ea/sandip/tests -t 28-ea/sandip && grep -q 'OPENAI_BASE_URL' 28-ea/sandip/README.md && grep -A12 '^### Slice 2 live evidence' 28-ea/sandip/docs/sdlc/changes/2026-11-05-daily-briefing/plan.md | grep -q 'snapshot'`
 
     ```text
     $ python3 -m unittest discover -s 28-ea/sandip/tests -t 28-ea/sandip   # at 18c8af9
     Ran 536 tests in 0.457s
     OK
-    $ grep -q 'OPENAI_BASE_URL' 28-ea/sandip/DAILY_BRIEFING.md
+    $ grep -q 'OPENAI_BASE_URL' 28-ea/sandip/README.md
     exit 0
     $ grep -A12 '^### Slice 2 live evidence' … | grep -q 'snapshot'
     exit 0   # live runs 2026-11-06 at 7ca5371, details below, deviation rows 22 and 25
@@ -525,13 +525,13 @@ Run live 2026-11-06 on both systems with the `team28c` login and `OPENAI_BASE_UR
     $ python3 -m unittest discover -s 28-ea/sandip/tests -t 28-ea/sandip -p test_scenarios.py
     Ran 68 tests ... OK
     ```
-31. Add the approval step to `DAILY_BRIEFING.md`, run the full suite and then, with the user's token (needs a human, outside the Bash sandbox, one real draft written to Keystone and left there), a run with stdin from `/dev/null` inside the snapshot guardrail (empty diff, "0 saved (0 edited), N skipped, 0 not saved"), one approved save on Keystone (diff exactly one new draft), a rerun showing "draft already saved" for it (which confirms deviation row 25's `created_by` and `in_reply_to`) and one harness-style run per system, recording the results under a `### Slice 3 live evidence` heading at the end of this section · verify: `python3 -m unittest discover -s 28-ea/sandip/tests -t 28-ea/sandip && grep -q 'No drafts to approve' 28-ea/sandip/DAILY_BRIEFING.md && grep -A12 '^### Slice 3 live evidence' 28-ea/sandip/docs/sdlc/changes/2026-11-05-daily-briefing/plan.md | grep -q 'snapshot'`
+31. Add the approval step to `README.md`, run the full suite and then, with the user's token (needs a human, outside the Bash sandbox, one real draft written to Keystone and left there), a run with stdin from `/dev/null` inside the snapshot guardrail (empty diff, "0 saved (0 edited), N skipped, 0 not saved"), one approved save on Keystone (diff exactly one new draft), a rerun showing "draft already saved" for it (which confirms deviation row 25's `created_by` and `in_reply_to`) and one harness-style run per system, recording the results under a `### Slice 3 live evidence` heading at the end of this section · verify: `python3 -m unittest discover -s 28-ea/sandip/tests -t 28-ea/sandip && grep -q 'No drafts to approve' 28-ea/sandip/README.md && grep -A12 '^### Slice 3 live evidence' 28-ea/sandip/docs/sdlc/changes/2026-11-05-daily-briefing/plan.md | grep -q 'snapshot'`
 
     ```text
     $ python3 -m unittest discover -s 28-ea/sandip/tests -t 28-ea/sandip   # at 4a98105
     Ran 675 tests in 0.472s
     OK
-    $ grep -q 'No drafts to approve' 28-ea/sandip/DAILY_BRIEFING.md && grep -A12 '^### Slice 3 live evidence' … | grep -q 'snapshot'
+    $ grep -q 'No drafts to approve' 28-ea/sandip/README.md && grep -A12 '^### Slice 3 live evidence' … | grep -q 'snapshot'
     exit 0   # live runs 2026-11-06, details below, deviation row 30
     ```
 

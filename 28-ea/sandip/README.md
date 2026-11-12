@@ -1,5 +1,21 @@
 # Seat 28 EA: daily briefing (Sandip)
 
+## How to run
+
+Python 3.9+, no packages to install. Run from the repository root.
+
+```
+python3 28-ea/sandip/briefing.py login suryodaya     # once per system, again every 7 days
+python3 28-ea/sandip/briefing.py login keystone
+export OPENAI_BASE_URL=http://127.0.0.1:8111/v1 OPENAI_MODEL=gemini-2.5-flash   # glc, for proposed replies
+python3 28-ea/sandip/briefing.py                     # print and save today's briefing
+python3 -m unittest discover -s 28-ea/sandip/tests -t 28-ea/sandip              # offline tests
+```
+
+After the briefing, each proposed reply is offered: `s` saves it as an unsent draft, `e` edits it first, Enter
+skips it and `q` stops. Without the model settings the briefing still runs, with no proposed replies. To skip
+every reply, run with `< /dev/null`. The briefing is also saved to `28-ea/sandip/briefings/<date>.md`.
+
 One command prints and saves today's briefing from Suryodaya and Keystone: unread mail that needs an
 answer, each with a summary and a proposed reply, meetings in each system's own day, with clash and
 declined marks, and your own overdue tasks. Afterwards you approve each proposed reply one at a time, and
@@ -163,6 +179,11 @@ files cover one module each.
   single-use approval token (minted only by the approval loop, once per reply you chose to save) and the
   arguments say `folder="drafts"` and `is_draft=true`. `call` and the allowlist stay read-only.
 - A reply is saved only after you chose `s` or `e` for it in that run; the end of input never saves.
+- The only subprocess the code starts is your text editor, and only for the human approval step: after you type
+  `e` for a reply, and only when standard input is a terminal (otherwise `e` is a skip and no editor opens).
+  It runs `$EDITOR`, else `nano`, as an argument list (no shell) on a temporary file holding the proposed reply,
+  which is deleted afterwards. The edited text goes back to the same approval flow; the editor itself never
+  saves or sends anything.
 - No token appears on screen, in the Markdown file or in the JSON: loaded tokens are replaced by `***` before
   anything is printed or written, and the renderer is never given one.
 - Files are written to a temporary file and renamed, so a failed write never damages an earlier file.
